@@ -60,7 +60,10 @@ export default class Customer {
     this._address = address;
     this.addDomainEvent(new CustomerAddressChanged(this));
   }
-
+  
+  changeName(name: string): void {
+    this._name = name;
+  }
   
   public get address() : Address | undefined {
     return this._address;
