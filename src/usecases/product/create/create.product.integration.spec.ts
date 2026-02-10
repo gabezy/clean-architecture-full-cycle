@@ -15,7 +15,7 @@ describe('unit tests for create product', () => {
     sequelize = new Sequelize({
       dialect: 'sqlite',
       storage: ':memory',
-      logginh: false,
+      logging: false,
       sync: { force: true },
     })
 

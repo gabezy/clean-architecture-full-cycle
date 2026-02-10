@@ -12,7 +12,7 @@ describe("Product repository test", () => {
     sequelize = new Sequelize({
       dialect: 'sqlite',
       storage: ':memory',
-      logginh: false,
+      logging: false,
       sync: { force: true },
     })
 
@@ -27,7 +27,7 @@ describe("Product repository test", () => {
 
     await productRepository.create(product);
 
-    const productModel = await ProductModel.findOne({ where: { id: '1' } });
+    const productModel = await ProductModel.findOne({ where: { id: product.id } });
 
     expect(productModel.toJSON()).toStrictEqual({
       id: "1",
