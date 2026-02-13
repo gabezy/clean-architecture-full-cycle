@@ -1,8 +1,10 @@
 import BaseEntity from "../../@shared/entity/entity.base";
 import EventInterface from "../../@shared/event/event.interface";
 import NotificationError from "../../@shared/notification/notification.error";
+import ValidatorInterface from "../../@shared/validator/validator.interface";
 import CustomerAddressChanged from "../events/customer-address-changed.event";
 import CustomerCreatedEvent from "../events/customer-created.event";
+import CustomerValidatorFactory from "../factory/customer.validator.factory";
 import Address from "../vos/address";
 
 export default class Customer extends BaseEntity {
@@ -16,20 +18,15 @@ export default class Customer extends BaseEntity {
   constructor(id: string, name: string) {
     super(id);
     
-    if (id == null || id.length == 0) {
-      this.notification.addError({ message: 'Id is required', context: 'customer' })
-    }
-
-    if (name == null || name.length == 0) {
-      this.notification.addError({ message: 'Name is required', context: 'customer' })
-    }
     
-    if (this.notification.hasErrors()) {
-      throw new NotificationError(this.notification.getErrors());
-    }
-
     this._name = name;
     this._activate = true;
+    
+    CustomerValidatorFactory.create().validate(this);
+    
+    if (this.notification.hasErrors('customer')) {
+      throw new NotificationError(this.notification.getErrors());
+    }
 
     this.addDomainEvent(new CustomerCreatedEvent(this));
   }

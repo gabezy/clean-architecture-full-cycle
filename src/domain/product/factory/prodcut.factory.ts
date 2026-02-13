@@ -1,6 +1,6 @@
 import Product from "../entities/product";
 import ProductB from "../entities/product-b";
-import ProductInterface from "../entities/product.interface";
+import BaseProduct from "../entities/product.interface";
 import { v4 as uuid } from 'uuid'
 
 export default class ProductFactory {
@@ -8,7 +8,7 @@ export default class ProductFactory {
     type: string,
     name: string,
     price: number,
-  ): ProductInterface {
+  ): BaseProduct {
     const productType = type.trim().toLowerCase();
     const id = uuid()
 

@@ -8,7 +8,7 @@ import {
 } from "./update.product.dto";
 import ProductModel from "../../../infra/product/repository/sequelize/model/product.model";
 import ProductRepository from "../../../infra/product/repository/product.repository";
-import ProductInterface from "../../../domain/product/entities/product.interface";
+import BaseProduct from "../../../domain/product/entities/product.interface";
 import Product from "../../../domain/product/entities/product";
 import UpdateProductUseCase from "./update.product.usecase";
 
@@ -16,7 +16,7 @@ describe("Integration tests for update product", () => {
   let sequelize: Sequelize;
   let repository: ProductRepositoryInterface;
   let usecase: UseCaseInterface<InputUpdateProductDTO, OutputUpdateProductDTO>;
-  let product: ProductInterface;
+  let product: BaseProduct;
 
   beforeEach(async () => {
     sequelize = new Sequelize({

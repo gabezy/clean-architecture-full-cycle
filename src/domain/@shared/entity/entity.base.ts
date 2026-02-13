@@ -1,8 +1,9 @@
 import Notification from "../notification/notification";
 
 export default abstract class BaseEntity {
+  
   protected _id: string;
-  protected notification: Notification;
+  public notification: Notification;
 
   constructor(id: string) {
     this._id = id;

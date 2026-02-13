@@ -7,13 +7,13 @@ import FindProductUseCase from "./find.product.usecase";
 import ProductModel from "../../../infra/product/repository/sequelize/model/product.model";
 import ProductRepository from "../../../infra/product/repository/product.repository";
 import Product from "../../../domain/product/entities/product";
-import ProductInterface from "../../../domain/product/entities/product.interface";
+import BaseProduct from "../../../domain/product/entities/product.interface";
 
 describe("integration test for find Product", () => {
   let sequelize: Sequelize;
   let repository: ProductRepositoryInterface;
   let usecase: UseCaseInterface<InputFindProductDTO, OutputFindProductDTO>;
-  let product: ProductInterface;
+  let product: BaseProduct;
 
   beforeEach(async () => {
     sequelize = new Sequelize({

@@ -1,26 +1,11 @@
-import BaseEntity from "../../@shared/entity/entity.base";
 import NotificationError from "../../@shared/notification/notification.error";
-import ProductInterface from "./product.interface";
+import BaseProduct from "./product.interface";
 
-export default class ProductB extends BaseEntity implements ProductInterface {
+export default class ProductB extends BaseProduct {
 
-  _name: string;
-  _price: number;
 
   constructor(id: string, name: string, price: number) {
-    super(id);
-    
-    this._name = name;
-    this._price = price;
-    this.validate();
-  }
-
-  get name(): string {
-    return this._name;
-  }
-
-  get price(): number {
-    return this._price * 2;
+    super(id, name, price * 2);
   }
 
   changeName(name: string): void {

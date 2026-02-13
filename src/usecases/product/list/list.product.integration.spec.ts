@@ -3,7 +3,7 @@ import ProductFactory from "../../../domain/product/factory/prodcut.factory";
 import ProductRepositoryInterface from "../../../domain/product/repositories/product-repository.interface";
 import UseCaseInterface from "../../usecase.interface";
 import { InputListProductDTO, OutputListProductDTO } from "./list.product.dto";
-import ProductInterface from "../../../domain/product/entities/product.interface";
+import BaseProduct from "../../../domain/product/entities/product.interface";
 import ProductModel from "../../../infra/product/repository/sequelize/model/product.model";
 import ProductRepository from "../../../infra/product/repository/product.repository";
 import Product from "../../../domain/product/entities/product";
@@ -13,8 +13,8 @@ describe("Integration test for list Product", () => {
   let sequelize: Sequelize;
   let repository: ProductRepositoryInterface;
   let usecase: UseCaseInterface<InputListProductDTO, OutputListProductDTO>;
-  let product: ProductInterface;
-  let product2: ProductInterface;
+  let product: BaseProduct;
+  let product2: BaseProduct;
 
   beforeEach(async () => {
     sequelize = new Sequelize({

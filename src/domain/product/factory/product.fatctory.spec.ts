@@ -1,10 +1,10 @@
-import ProductInterface from "../entities/product.interface";
+import BaseProduct from "../entities/product.interface";
 import ProductFactory from "./prodcut.factory";
 
 describe("Product factory unit test", () => {
   
   it("should create a product type A", () => {
-    const product: ProductInterface = ProductFactory.create("a", "Product A", 1);
+    const product: BaseProduct = ProductFactory.create("a", "Product A", 1);
     
     expect(product.id).toBeDefined();
     expect(product.name).toBe("Product A");
@@ -14,7 +14,7 @@ describe("Product factory unit test", () => {
   
   
   it("should create a product type B", () => {
-    const product: ProductInterface = ProductFactory.create("b", "Product B", 10);
+    const product: BaseProduct = ProductFactory.create("b", "Product B", 10);
     
     expect(product.id).toBeDefined();
     expect(product.name).toBe("Product B");
