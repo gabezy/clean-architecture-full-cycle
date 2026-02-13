@@ -19,6 +19,8 @@ export default class CreateCustomerUseCase implements UseCaseInterface<InputCrea
       new Address(address.street, address.number, address.zip, address.city)
     );
     
+    console.log(customer);
+    
     await this.repository.create(customer);
     
     return {

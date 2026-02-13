@@ -1,27 +1,26 @@
-import {Sequelize} from 'sequelize-typescript';
-import CustomerRepository from './customer.repository';
-import CustomerModel from './sequelize/model/customer.model';
-import Customer from '../../../domain/customer/entities/customer';
-import Address from '../../../domain/customer/vos/address';
+import { Sequelize } from "sequelize-typescript";
+import CustomerRepository from "./customer.repository";
+import CustomerModel from "./sequelize/model/customer.model";
+import Customer from "../../../domain/customer/entities/customer";
+import Address from "../../../domain/customer/vos/address";
 
 describe("customer repository test", () => {
-
   let sequelize: Sequelize;
   let customerRepository: CustomerRepository;
 
   beforeAll(async () => {
     sequelize = new Sequelize({
-      dialect: 'sqlite',
-      storage: ':memory',
-      logginh: false,
+      dialect: "sqlite",
+      storage: ":memory",
+      logging: false,
       sync: { force: true },
-    })
+    });
 
     sequelize.addModels([CustomerModel]);
-    await sequelize.sync()
+    await sequelize.sync({ force: true });
 
     customerRepository = new CustomerRepository();
-  })
+  });
 
   it("should create a customer", async () => {
     const customer = new Customer("123", "Customer 1");
@@ -42,13 +41,18 @@ describe("customer repository test", () => {
       zipcode: address.zip,
       city: address.city,
     });
-  })
+  });
 
   afterEach(async () => {
-    await CustomerModel.destroy({ truncate: true, });
-  })
+    try {
+      await CustomerModel.destroy({ where: {}, truncate: true });
+    } catch (error) {
+      // Fallback if truncate fails
+      await CustomerModel.destroy({ where: {} });
+    }
+  });
 
   afterAll(async () => {
     await sequelize.close();
-  })
-})
+  });
+});

@@ -24,7 +24,7 @@ describe('Unit test for update customer usecase', () => {
   const usecase: UseCaseInterface<InputUpdateCustomerDTO, OutputUpdateCustomerDTO> = new UpdateCustomerUseCase(repository);
   
   it('should update the customer', async () => {
-    const id = 'some id';
+    const id = customer.id;
     const input: InputUpdateCustomerDTO = {
       id,
       name: 'teste',

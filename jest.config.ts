@@ -3,45 +3,30 @@
  * https://jestjs.io/docs/configuration
  */
 
-import type {Config} from 'jest';
+import type { Config } from "jest";
 
 const config: Config = {
   transform: {
     "^.+\.(t|j)sx?$": "@swc/jest",
   },
-  // All imported modules in your tests should be mocked automatically
-  // automock: false,
 
-  // Stop running tests after `n` failures
-  // bail: 0,
+  // Run tests sequentially to avoid SQLite conflicts
+  maxWorkers: 1,
 
-  // The directory where Jest should store its cached dependency information
-  // cacheDirectory: "/private/var/folders/kh/221yxrhd3qj84ks2zf62f29m0000gn/T/jest_dx",
+  // Ensure proper test isolation
+  testTimeout: 10000,
 
   // Automatically clear mock calls, instances, contexts and results before every test
   clearMocks: true,
-  
+
   // Transform ES modules from node_modules
-  transformIgnorePatterns: [
-    "node_modules/(?!(uuid)/)"
-  ],
-
-  // Indicates whether the coverage information should be collected while executing the test
-  // collectCoverage: false,
-
-  // An array of glob patterns indicating a set of files for which coverage information should be collected
-  // collectCoverageFrom: undefined,
-
-  // The directory where Jest should output its coverage files
-  // coverageDirectory: undefined,
-
-  // An array of regexp pattern strings used to skip coverage collection
-  // coveragePathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  transformIgnorePatterns: ["node_modules/(?!(uuid)/)"],
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: "v8",
+
+  // Stop running tests after `n` failures
+  // bail: 0,
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [

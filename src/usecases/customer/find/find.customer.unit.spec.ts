@@ -28,7 +28,7 @@ describe("Unit Test find customer user case", () => {
   });
 
   it("should find customer by input", async () => {
-    const id = "some id";
+    const id = customer.id;
 
     const input: InputFindCustomerDTO = { id };
     const useCase: UseCaseInterface<
