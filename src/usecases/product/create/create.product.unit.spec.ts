@@ -1,7 +1,7 @@
 import ProductRepositoryInterface from "../../../domain/product/repositories/product-repository.interface";
 import UseCaseInterface from "../../usecase.interface";
 import { InputCreateProductDTO, OutputCreateProductDTO } from "./create.product.dto";
-import { CreateProductUseCase } from "./create.product.usecase";
+import CreateProductUseCase from "./create.product.usecase";
 
 describe('unit tests for create product', () => {
   const mockRepository = (): ProductRepositoryInterface => {

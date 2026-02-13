@@ -2,7 +2,6 @@ import express, { Request, Response } from 'express'
 import CreateCustomerUseCase from '../../../usecases/customer/create/create.customer.usecase';
 import CustomerRepository from '../../customer/repository/customer.repository';
 import { InputCreateCustomerDTO } from '../../../usecases/customer/create/create.customer.dto';
-import ListProductUseCase from '../../../usecases/product/list/list.product.usecase';
 import ListCustomerUseCase from '../../../usecases/customer/list/list.customer.usecase';
 
 export const customerRoute = express.Router();

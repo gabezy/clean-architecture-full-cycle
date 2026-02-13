@@ -4,7 +4,7 @@ import UseCaseInterface from "../../usecase.interface";
 import { InputCreateProductDTO, OutputCreateProductDTO } from "./create.product.dto";
 import ProductModel from "../../../infra/product/repository/sequelize/model/product.model";
 import ProductRepository from "../../../infra/product/repository/product.repository";
-import { CreateProductUseCase } from "./create.product.usecase";
+import CreateProductUseCase from "./create.product.usecase";
 
 describe('unit tests for create product', () => {
   let sequelize: Sequelize;

@@ -4,7 +4,7 @@ import ProductRepositoryInterface from "../../../domain/product/repositories/pro
 import UseCaseInterface from "../../usecase.interface";
 import { InputCreateProductDTO, OutputCreateProductDTO } from "./create.product.dto";
 
-export class CreateProductUseCase implements UseCaseInterface<InputCreateProductDTO, OutputCreateProductDTO> {
+export default class CreateProductUseCase implements UseCaseInterface<InputCreateProductDTO, OutputCreateProductDTO> {
   
   private repository: ProductRepositoryInterface;
   
