@@ -1,11 +1,12 @@
+import BaseEntity from "../../@shared/entity/entity.base";
 import EventInterface from "../../@shared/event/event.interface";
+import NotificationError from "../../@shared/notification/notification.error";
 import CustomerAddressChanged from "../events/customer-address-changed.event";
 import CustomerCreatedEvent from "../events/customer-created.event";
 import Address from "../vos/address";
 
-export default class Customer {
+export default class Customer extends BaseEntity {
 
-  private _id: string;
   private _name: string;
   private _address?: Address;
   private _activate: boolean = true;
@@ -13,15 +14,20 @@ export default class Customer {
   private _domainEvents: EventInterface[] = [];
 
   constructor(id: string, name: string) {
+    super(id);
+    
     if (id == null || id.length == 0) {
-      throw new Error("Id is required");
+      this.notification.addError({ message: 'Id is required', context: 'customer' })
     }
 
     if (name == null || name.length == 0) {
-      throw new Error("Name is required");
+      this.notification.addError({ message: 'Name is required', context: 'customer' })
+    }
+    
+    if (this.notification.hasErrors()) {
+      throw new NotificationError(this.notification.getErrors());
     }
 
-    this._id = id;
     this._name = name;
     this._activate = true;
 
@@ -40,17 +46,13 @@ export default class Customer {
     this._domainEvents = [];
   }
 
-  public get id() : string {
-    return this._id
-  }
-
   public get name() : string {
     return this._name
   }
   
   public set address(v : Address) {
     if (v == null || v == undefined) {
-      throw new Error("")
+      this.notification.addError({ message: 'address can not be null', context: 'customer' })
     }
 
     this._address = v;

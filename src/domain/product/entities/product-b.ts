@@ -1,22 +1,20 @@
+import BaseEntity from "../../@shared/entity/entity.base";
+import NotificationError from "../../@shared/notification/notification.error";
 import ProductInterface from "./product.interface";
 
-export default class ProductB implements ProductInterface {
+export default class ProductB extends BaseEntity implements ProductInterface {
 
-  _id: string;
   _name: string;
   _price: number;
 
   constructor(id: string, name: string, price: number) {
-    this._id = id;
+    super(id);
+    
     this._name = name;
     this._price = price;
     this.validate();
   }
 
-  get id(): string {
-    return this._id;
-  }
-  
   get name(): string {
     return this._name;
   }
@@ -37,14 +35,19 @@ export default class ProductB implements ProductInterface {
 
   validate(): boolean {
     if (this._id.length === 0) {
-      throw new Error("Id is required");
+      this.notification.addError({ message: 'Id is required', context: 'product' });
     }
     if (this._name.length === 0) {
-      throw new Error("Name is required");
+      this.notification.addError({ message: 'Name is required', context: 'product' });
     }
     if (this._price < 0) {
-      throw new Error("Price must be greater than zero");
+      this.notification.addError({ message: 'Price must be greater than zero', context: 'product' });
     }
+    
+    if (this.notification.hasErrors('product')) {
+      throw new NotificationError(this.notification.getErrors());
+    }
+    
     return true;
   }
 }
